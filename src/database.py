@@ -99,6 +99,36 @@ def apagar_usuario(id_usuario):
     finally:
         conexao.close()
           
+def mudar_nome_usuario(novo_nome, email):
+    conexao = conectar_banco()
+    cursor = conexao.cursor()
+    
+    try:
+        cursor.execute('''UPDATE usuarios SET nome = ? WHERE email = ?''', (novo_nome, email,))
+        
+        conexao.commit()
+        return True
+    except sqlite3.IntegrityError:
+        return False
+    finally:
+        conexao.close()
+        
+
+def mudar_senha(nova_senha, email):
+    conexao = conectar_banco()
+    cursor = conexao.cursor()
+    
+    try:
+        cursor.execute('''UPDATE usuarios SET senha = ? WHERE email = ?''', (nova_senha, email,))
+        
+        conexao.commit()
+        return True
+    except sqlite3.IntegrityError:
+        return False
+    finally:
+        conexao.close()
+
+
 if __name__ == '__main__': 
     conexao = conectar_banco()
     criar_tabelas()
@@ -106,4 +136,5 @@ if __name__ == '__main__':
     print(id_viagens)
     
     apagar_viagem("1")
-    apagar_usuario("erick@gmail.com")
+    
+    mudar_nome_usuario("erick__", "teste@gmail.com")
