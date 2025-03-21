@@ -16,6 +16,10 @@
         <a href="/"><img src="static/imgs/logo.png" alt="Logo TRVL" class="logo"></a>
         <div class="user-info">
             <H1><h1>Bem-vindo, {{ usuario }}!</h1></H1>
+            <form action = "{{url_for ('excluir_usuario') }}" method = "POST">
+                <input type = "hidden" name = "usuario_id" value = "{{ usuario }}">
+                <button type = "submit" class = "btn btn-danger">Excluir</button>
+            </form>
         </div>
     </header>
     <hr>
@@ -36,6 +40,11 @@
                         <h5 class="card-title">{{ viagem[0] }}</h5>
                         <p class="card-text">Data Prevista: {{ viagem[1] }}</p>
                         <p class="card-text">Status: {{ viagem[2] }}</p>
+
+                        <form action = "{{url_for ('excluir_viagem') }}" method = "POST">
+                            <input type = "hidden" name = "viagem_id" value = "{{ viagem[4] }}">
+                            <button type = "submit" class = "btn btn-danger">Excluir</button>
+                        </form>
                     </div>
                 </div>
             </div>
